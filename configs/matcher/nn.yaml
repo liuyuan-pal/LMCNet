@@ -1,0 +1,5 @@
+type: default
+mutual_best: false
+ratio_test: false
+ratio: 0.8
+cuda: true

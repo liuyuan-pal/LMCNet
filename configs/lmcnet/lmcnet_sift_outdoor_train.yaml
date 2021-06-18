@@ -1,0 +1,51 @@
+type: lmcnet
+name: lmcnet_sift_outdoor_train
+
+#############network###############
+eta: 10.0
+eta_learnable: true
+geom_feats_dim: 2
+image_feats_dim: 134
+knn_num: 8
+
+###############loss################
+loss: [cls,geom]
+val_metric: [pose]
+key_metric_name: oanet_Rt_auc_20
+geom_loss_max: 0.1
+geom_loss_step: 20000
+geom_loss_ratio: 0.5
+
+###############training############
+batch_size: 32
+total_step: 500000
+save_interval: 500
+val_interval: 5000
+save_inter_model: false
+save_inter_interval: 10000
+multi_gpus: false
+train_log_step: 100
+
+###############dataset#############
+dataset_root: data/yfcc_train_cache
+dataset_type: pose_feats
+dataset_extract_name: sift
+dataset_match_name: nn
+dataset_eig_name: small_min
+use_eig: true
+use_feats: true
+epipolar_inlier_thresh: 1.0e-2
+val_pair_info_fn: data/yfcc_train_cache/val-2000.pkl
+train_pair_info_fn: data/yfcc_train_cache/train-2000.pkl
+
+################lr#################
+lr_start: 1.0e-3
+lr_mid_epoch: 200000
+lr_decay_rate: 0.5
+lr_decay_step: 20000
+lr_min: 1.0e-5
+
+###############eval#############
+eig_type: small_min
+eig_dir: data/outdoor_eig_cache
+prob_thresh: 0.95

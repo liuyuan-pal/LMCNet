@@ -1,0 +1,10 @@
+matplotlib
+opencv-python
+scikit-image
+numpy
+tensorboardX
+torch
+PyYAML
+transforms3d
+easydict
+cffi

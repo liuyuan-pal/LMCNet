@@ -1,0 +1,14 @@
+type: lmcnet
+name: lmcnet_sift_indoor_pretrain
+
+#############network###############
+eta: 10.0
+eta_learnable: true
+geom_feats_dim: 2
+image_feats_dim: 134
+knn_num: 8
+
+###############eval#############
+eig_type: small
+eig_dir: data/indoor_eig_cache
+prob_thresh: 0.9

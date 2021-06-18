@@ -1,0 +1,49 @@
+type: lmcnet
+name: lmcnet_spg_indoor_train
+
+#############network###############
+eta: 10.0
+eta_learnable: true
+geom_feats_dim: 4
+image_feats_dim: 256
+knn_num: 8
+
+###############loss################
+loss: [cls,geom]
+val_metric: [pose]
+key_metric_name: oanet_Rt_auc_20
+geom_loss_max: 0.1
+geom_loss_step: 20000
+geom_loss_ratio: 0.5
+
+###############training############
+batch_size: 32
+total_step: 500000
+save_interval: 500
+val_interval: 2500
+save_inter_model: false
+save_inter_interval: 10000
+multi_gpus: false
+train_log_step: 100
+
+###############dataset#############
+dataset_type: pose_feats
+dataset_extract_name: superpoint_indoor
+dataset_match_name: superglue_indoor_raw
+dataset_eig_name: small_min
+use_eig: true
+val_pair_info_fn: data/scannet_train_cache/val-2000.pkl
+train_pair_info_fn: data/scannet_train_cache/train-2000.pkl
+epipolar_inlier_thresh: 1.0e-2
+
+################lr#################
+lr_start: 1.0e-3
+lr_mid_epoch: 200000
+lr_decay_rate: 0.5
+lr_decay_step: 20000
+lr_min: 1.0e-5
+
+###############eval#############
+eig_type: small
+eig_dir: data/indoor_eig_cache
+prob_thresh: 0.5

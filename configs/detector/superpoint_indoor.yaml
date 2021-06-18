@@ -1,0 +1,6 @@
+type: superpoint
+nms_radius: 4
+keypoint_threshold: 1.0e-5
+max_keypoints: 1024
+resize: [640,480]
+resize_float: false
