@@ -1,5 +1,5 @@
 type: lmcnet
-name: lmcnet_spg_indoor_pretrain
+name: lmcnet_spg_indoor
 
 #############network###############
 eta: 10.0
@@ -7,6 +7,7 @@ eta_learnable: true
 geom_feats_dim: 4
 image_feats_dim: 256
 knn_num: 8
+geom_only: false
 
 ###############eval#############
 eig_type: small

@@ -1,13 +1,12 @@
 type: lmcnet
-name: lmcnet_sift_indoor
+name: lmcnet_sift_indoor_geom
 
 #############network###############
 eta: 10.0
 eta_learnable: true
-geom_feats_dim: 2
-image_feats_dim: 134
+geom_only: true
+geom_feats_dim: 0
 knn_num: 8
-geom_only: false
 
 ###############eval#############
 eig_type: small

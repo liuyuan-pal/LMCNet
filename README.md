@@ -28,7 +28,8 @@ According to your installation path of CUDA, you may need to revise the variable
 
 1. Download the YFCC100M dataset and the SUN3D dataset from the [OANet](https://github.com/zjhthu/OANet) repository and the ScanNet dataset from [here](https://drive.google.com/drive/folders/1E3Gibmtiqv9NZm5TxjxwgRPFTAM40FRV?usp=sharing).
 
-2. Download pretrained LMCNet models from [here](https://drive.google.com/file/d/1mBXDxEKVsp3wGS5Xezpsc_oPlg-zgMDU/view?usp=sharing) and SuperGlue/SuperPoint models from [here](https://github.com/magicleap/SuperGluePretrainedNetwork/tree/master/models/weights).
+2. Download pretrained LMCNet models from [here](https://drive.google.com/file/d/1mBXDxEKVsp3wGS5Xezpsc_oPlg-zgMDU/view?usp=sharing) and SuperGlue/SuperPoint models from [here](https://github.com/magicleap/SuperGluePretrainedNetwork/tree/master/models/weights). 
+   (geometry-only models are available at [here](https://drive.google.com/file/d/1CoAt6sqjcNEtTszUP818Jd6FksiewFM4/view?usp=sharing).)
 
 3. Unzip and arrange all files like the following.
 ```
@@ -41,6 +42,8 @@ data/
 ├── model/
     ├── lmcnet_sift_indoor/
     ├── lmcnet_sift_outdoor/
+    ├── lmcnet_sift_indoor_geom/
+    ├── lmcnet_sift_outdoor_geom/
     └── lmcnet_spg_indoor/
 ├── yfcc100m/
 ├── sun3d_test/
@@ -54,6 +57,11 @@ data/
 Evaluate on the YFCC100M with SIFT descriptors and Nearest Neighborhood (NN) matcher:
 ```shell script
 python eval.py --name scannet --cfg configs/eval/lmcnet_sift_yfcc.yaml
+```
+
+Evaluate on the YFCC100M with SIFT descriptors and Nearest Neighborhood (NN) matcher using the geometry-only model:
+```shell script
+python eval.py --name scannet --cfg configs/eval/lmcnet_sift_yfcc_geom.yaml
 ```
 
 Evaluate on the SUN3D with SIFT descriptors and NN matcher:

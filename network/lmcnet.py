@@ -263,13 +263,15 @@ class LMCNet(nn.Module):
     def __init__(self, cfg):
         super().__init__()
         self.eta=cfg['eta']
-        geom_dim=cfg['geom_feats_dim'] # 2
-        image_dim=cfg['image_feats_dim'] # 134=128+2+2+2
+        geom_dim=cfg['geom_feats_dim'] # 2 or 0
         self.knn=KNN(cfg['knn_num'])
-        self.image_feats_embed=nn.Sequential(
-            nn.Conv2d(image_dim,128,1),
-            PointCN(128)
-        )
+        self.geom_only=cfg['geom_only']
+        if not cfg['geom_only']:
+            image_dim=cfg['image_feats_dim'] # 134=128+2+2+2
+            self.image_feats_embed=nn.Sequential(
+                nn.Conv2d(image_dim,128,1),
+                PointCN(128)
+            )
         self.geom_feats_embed=nn.Sequential(
             nn.Conv2d(4+2+geom_dim,128,1),
             PointCN(128)
@@ -288,19 +290,21 @@ class LMCNet(nn.Module):
         xs = data['xs'] # b,n,4
         eig_vec = data['eig_vec']
         eig_val = data['eig_val']
-        image_feats = data['image_feats'] # b,n,f
-        image_feats = image_feats.permute(0,2,1).unsqueeze(3) # b,4,n,1
-        geom_feats = data['geom_feats'] # b,n,f
-        geom_feats = geom_feats.permute(0,2,1).unsqueeze(3) # b,4,n,1
-
         xs = xs.permute(0,2,1).unsqueeze(3) # b,4,n,1
         _, idxs = self.knn(xs[...,0], xs[...,0])
         idxs = idxs.permute(0, 2, 1)
         motion_diff = compute_smooth_motion_diff(xs,eig_vec,eig_val,self.eta)
 
-        image_feats = self.image_feats_embed(image_feats)
-        geom_feats = self.geom_feats_embed(torch.cat([xs, motion_diff, geom_feats], 1))
-        corr_feats = image_feats + geom_feats
+        if not self.geom_only:
+            image_feats = data['image_feats'] # b,n,f
+            image_feats = image_feats.permute(0,2,1).unsqueeze(3) # b,4,n,1
+            geom_feats = data['geom_feats'] # b,n,f
+            geom_feats = geom_feats.permute(0,2,1).unsqueeze(3) # b,4,n,1
+            image_feats = self.image_feats_embed(image_feats)
+            geom_feats = self.geom_feats_embed(torch.cat([xs, motion_diff, geom_feats], 1))
+            corr_feats = image_feats + geom_feats
+        else:
+            corr_feats = self.geom_feats_embed(torch.cat([xs, motion_diff], 1))
 
         for net in self.lmcblock_list:
             corr_feats = net(corr_feats, idxs, eig_vec, eig_val)

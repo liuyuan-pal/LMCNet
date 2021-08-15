@@ -1,5 +1,5 @@
 desc: configs/descriptor/none.yaml
 det: configs/detector/sift.yaml
 matcher: configs/matcher/nn.yaml
-filter: configs/lmcnet/lmcnet_sift_indoor_pretrain.yaml
+filter: configs/lmcnet/lmcnet_sift_indoor_geom_pretrain.yaml
 estimator: configs/estimator/ransac_0.001.yaml

@@ -1,5 +1,5 @@
 desc: configs/descriptor/none.yaml
 det: configs/detector/superpoint_indoor.yaml
 matcher: configs/matcher/superglue_indoor_raw.yaml
-filter: configs/lmcnet/lmcnet_spg_indoor.yaml
+filter: configs/lmcnet/lmcnet_spg_indoor_pretrain.yaml
 estimator: configs/estimator/rescale_ransac_640.yaml
