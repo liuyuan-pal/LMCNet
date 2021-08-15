@@ -90,6 +90,16 @@ python trainset_generate.py \
 ```shell script
 python train_model.py --cfg configs/lmcnet/lmcnet_sift_outdoor_train.yaml
 ```
+## Citation
+
+```bibtex
+@inproceedings{liu2021learnable,
+  title={Learnable Motion Coherence for Correspondence Pruning},
+  author={Liu, Yuan and Liu, Lingjie and Lin, Cheng and Dong, Zhen and Wang, Wenping},
+  booktitle={CVPR}
+  year={2021}
+}
+```
 
 ## Acknowledgement
 
