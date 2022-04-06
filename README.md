@@ -32,7 +32,7 @@ According to your installation path of CUDA, you may need to revise the variable
    (geometry-only models are available at [here](https://drive.google.com/file/d/1CoAt6sqjcNEtTszUP818Jd6FksiewFM4/view?usp=sharing).)
 
 3. Unzip and arrange all files like the following.
-```
+```bash
 data/
 ├── superpoint/
     └── superpoint_v1.pth
@@ -49,6 +49,7 @@ data/
 ├── sun3d_test/
 ├── sun3d_train/
 ├── scannet_dataset/
+├── pairs/ # this was extracted from the dataset downloaded from OANet repository.
 └── scannet_train_dataset/
 ```
 

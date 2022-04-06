@@ -85,7 +85,7 @@ class OANetSplitDataset(PoseSequenceDataset):
         self.geo_list=[os.path.join(seq_dir,pth) for pth in np.loadtxt(geo_list_file,dtype=str)]
         self.vis_list=[os.path.join(seq_dir,pth) for pth in np.loadtxt(vis_list_file,dtype=str)]
 
-        self.pair_ids=read_pickle(f'data/yfcc100m/pairs/{self.seq_name}-te-1000-pairs.pkl')
+        self.pair_ids=read_pickle(f'data/pairs/{self.seq_name}-te-1000-pairs.pkl')
         self.pair_ids=[(str(pair[0]),str(pair[1])) for pair in self.pair_ids]
 
         unique_ids = set()
